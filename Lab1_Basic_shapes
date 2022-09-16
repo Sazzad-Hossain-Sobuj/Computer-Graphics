@@ -1,0 +1,192 @@
+#include <GL/gl.h>
+#include <GL/glut.h>
+#include <math.h>
+
+void circle(GLfloat rx,GLfloat ry,GLfloat cx,GLfloat cy){
+
+    glBegin(GL_TRIANGLE_FAN);
+
+	for(int i=0;i<=100;i++){
+
+	float angle=2*3.1416*i/100;
+
+	float x=rx*cosf(angle);
+	float y=ry*sinf(angle);
+	glVertex2f(x+cx,y+cy);
+
+}
+  glEnd();
+}
+
+
+void display(void)
+{
+
+glClear (GL_COLOR_BUFFER_BIT);
+
+//background color
+glBegin(GL_QUADS);
+  glColor3ub(5, 37, 5  );
+	glVertex2f(0,0);
+	glVertex2f(0,45);
+	glVertex2f(60,45);
+	glVertex2f(60,0);
+glEnd();
+
+glColor3ub(241, 250, 250  );
+glLineWidth(3);
+glBegin(GL_LINES);
+    //x axis
+    glVertex2f(0,0);
+    glVertex2f(60,0);
+
+    //y axis
+    glVertex2f(0,0);
+    glVertex2f(0,45);
+
+glEnd();
+
+glBegin(GL_QUADS);
+
+  //rectangle
+  glColor3ub(64, 224, 208  );
+	glVertex2f(5,10);
+	glVertex2f(20,10);
+	glVertex2f(20,4);
+	glVertex2f(5,4);
+
+	//square
+  glColor3ub(52, 73, 94 );
+	glVertex2f(23,10);
+	glVertex2f(31,10);
+	glVertex2f(31,4);
+	glVertex2f(23,4);
+
+	//diamond
+  glColor3ub(222, 49, 99);
+	glVertex2f(38.5,10);
+	glVertex2f(43.5,6.5);
+	glVertex2f(38.5,3);
+	glVertex2f(33.5,6.5);
+
+	//trapezoid
+  glColor3ub(204, 204, 255 );
+	glVertex2f(45,10);
+	glVertex2f(45,4);
+	glVertex2f(59,4);
+	glVertex2f(55,10);
+
+glEnd();
+
+glBegin(GL_TRIANGLES);
+
+  //triangle
+  glColor3ub(29, 131, 72  );
+	glVertex2f(5,15);
+
+	glColor3ub(69, 179, 157 );
+	glVertex2f(20,15);
+
+	glColor3ub(244, 208, 63  );
+	glVertex2f(12.5,22);
+
+glEnd();
+
+glBegin(GL_POLYGON);
+
+  //pentagon
+  glColor3ub(212, 172, 13);
+	glVertex2f(24,15);
+	glVertex2f(29,15);
+	glVertex2f(31,18.5);
+  glVertex2f(26.5,22);
+	glVertex2f(22,18.5);
+
+glEnd();
+
+glBegin(GL_POLYGON);
+  //hexagon
+  glColor3ub(30, 224, 170);
+	glVertex2f(35,22);
+	glVertex2f(40,22);
+	glVertex2f(42.5,18.5);
+  glVertex2f(40,15);
+	glVertex2f(35,15);
+	glVertex2f(32.5,18.5);
+
+glEnd();
+
+glBegin(GL_POLYGON);
+  //Octagon
+  glColor3ub(212, 172, 13);
+	glVertex2f(47,22);
+	glVertex2f(51,22);
+	glVertex2f(54,19.5);
+  glVertex2f(54,17.5);
+	glVertex2f(51,15);
+	glVertex2f(47,15);
+	glVertex2f(44,17.5);
+	glVertex2f(44,19.5);
+
+glEnd();
+
+    //circle
+    glColor3ub(251, 252, 252  );
+    circle(4,3,17.5,33);
+
+    //oval
+    glColor3ub(223, 255, 0 );
+    circle(3,3,7.5,33);
+
+    //half moon
+    glColor3ub(253, 254, 254 );
+    circle(4,3,27.5,33);
+
+    glColor3ub(5, 37, 5 );
+    circle(4,3,30,34.5);
+
+  //star
+  glBegin(GL_TRIANGLES);
+  //1st triangle
+  glColor3ub(236, 240, 241 );
+	glVertex2f(39,35);
+	glVertex2f(57,35);
+	glVertex2f(48,29);
+
+  //2n triangle
+  glColor3ub(236, 240, 241  );
+	glVertex2f(39,35);
+	glVertex2f(54,25);
+	glVertex2f(50,35);
+
+  //3rd triangle
+  glColor3ub(236, 240, 241 );
+	glVertex2f(41,25.5);
+	glVertex2f(48.5,40.5);
+	glVertex2f(51.5,31.1);
+
+
+  glEnd();
+
+  glFlush ();
+}
+
+void init(){
+	glClearColor(0.0, 0.0, 0.0, 0.0);
+	glMatrixMode(GL_PROJECTION);
+	gluOrtho2D(0,60,0,45);
+}
+
+
+int main(int argc, char** argv)
+{
+glutInit(&argc, argv);
+glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
+glutInitWindowSize (500, 500);
+glutInitWindowPosition (50, 50);
+glutCreateWindow ("Lab1_Basic_Shape");
+init ();
+glutDisplayFunc(display);
+glutMainLoop();
+return 0;
+}
