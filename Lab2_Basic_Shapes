@@ -1,0 +1,204 @@
+#include <GL/gl.h>
+#include <GL/glut.h>
+#include <math.h>
+
+void circle(GLfloat rx,GLfloat ry,GLfloat cx,GLfloat cy){
+
+    glBegin(GL_TRIANGLE_FAN);
+
+	for(int i=0;i<=100;i++){
+
+	float angle=2*3.1416*i/100;
+
+	float x=rx*cosf(angle);
+	float y=ry*sinf(angle);
+	glVertex2f(x+cx,y+cy);
+
+}
+  glEnd();
+}
+
+
+void display(void)
+{
+
+    glClear (GL_COLOR_BUFFER_BIT);
+
+    //background
+    glBegin(GL_QUADS);
+    glColor3ub(39, 55, 70  );
+    glVertex3f(-50,-50,0);
+    glVertex3f(-50,50,0);
+    glVertex3f(50,50,0);
+    glVertex3f(50,-50,0);
+
+    glEnd();
+
+
+
+	// x axis
+    glColor3ub(255, 255, 255 );
+    glBegin(GL_LINES);
+    glVertex3f(-50.0,0.0,0.0);
+    glVertex3f(50.0,0.0,0.0);
+    glEnd();
+
+
+    //y axis
+    glColor3ub(255, 255, 255 );
+    glBegin(GL_LINES);
+    glVertex3f(0.0,-50.0,0.0);
+    glVertex3f(0.0,50.0,0.0);
+    glEnd();
+
+    //points
+
+    glColor3f(11,233,0);
+    glPointSize(5);
+    glBegin(GL_POINTS);
+    glVertex3f(0.0,0.0,0.0);
+
+    glEnd();
+
+    //mail sign
+    //circle
+    glColor3ub(102, 204, 255);
+    circle(10,10,25,25);
+
+    glBegin(GL_QUADS);
+    glColor3ub(213, 216, 220);
+    glVertex2f(18,20);
+    glVertex2f(32,20);
+    glVertex2f(32,30);
+    glVertex2f(18,30);
+    glEnd();
+
+    glBegin(GL_TRIANGLES);
+    glColor3ub(235, 237, 239 );
+    glVertex2f(32,30);
+    glVertex2f(18,30);
+    glVertex2f(25,25);
+    glEnd();
+
+    //kite
+    glColor3ub(255, 51, 51 );
+    circle(0.5,0.5,-25,-25);
+
+    //1st Triangle
+    glBegin(GL_TRIANGLES);
+    glColor3ub(63, 255, 51 );
+    glVertex2f(-25,-25);
+    glVertex2f(-26,-15);
+    glVertex2f(-35,-15);
+
+    //2n triangle
+    glColor3ub(255, 51, 51 );
+    glVertex2f(-25,-25);
+    glVertex2f(-35,-26);
+    glVertex2f(-35,-35);
+
+    //3rd triangle
+    glColor3ub(63, 255, 51);
+    glVertex2f(-25,-25);
+    glVertex2f(-24,-35);
+    glVertex2f(-15,-35);
+
+    //4th
+    //3rd triangle
+    glColor3ub(255, 51, 51 );
+    glVertex2f(-25,-25);
+    glVertex2f(-15,-24);
+    glVertex2f(-15,-15);
+
+    glEnd();
+    //flag
+    glBegin(GL_QUADS);
+
+    //stick
+    glColor3ub(2215, 160, 41 );
+    glVertex2f(5,-5);
+    glVertex2f(6,-5);
+    glVertex2f(6,-45);
+    glVertex2f(5,-45);
+
+    //base
+    glColor3ub(167, 139, 9  );
+    glVertex2f(3,-45);
+    glVertex2f(8,-45);
+    glVertex2f(8,-47);
+    glVertex2f(3,-47);
+
+    glColor3ub(167, 139, 9  );
+    glVertex2f(1,-47);
+    glVertex2f(10,-47);
+    glVertex2f(10,-49.5);
+    glVertex2f(1,-49.5);
+
+    //rectangle
+    glColor3ub(0, 106, 78);
+    glVertex2f(6,-8);
+    glVertex2f(6,-22);
+    glVertex2f(36,-22);
+    glVertex2f(36,-8);
+
+    glEnd();
+
+    glColor3ub(244, 42, 65 );
+    circle(5,5,21,-15);
+
+
+    //download_sign
+
+    glBegin(GL_QUADS);
+
+    glColor3ub(102, 204, 255 );
+    glVertex2f(-15,35);
+    glVertex2f(-15,15);
+    glVertex2f(-35,15);
+    glVertex2f(-35,35);
+
+    glEnd();
+    glColor3ub(248, 249, 249  );
+    circle(10,10,-25,25);
+
+    glBegin(GL_QUADS);
+    glColor3ub(213, 216, 220 );
+    glVertex2f(-28,32);
+    glVertex2f(-28,24);
+    glVertex2f(-22,24);
+    glVertex2f(-22,32);
+
+    glEnd();
+
+    glBegin(GL_TRIANGLES);
+    glColor3ub(213, 216, 220 );
+    glVertex2f(-30,24);
+    glVertex2f(-20,24);
+    glVertex2f(-25,18);
+    
+    glEnd();
+    
+    glFlush ();
+}
+
+void init (void)
+{
+    glClearColor (0.0, 0.0, 0.0, 0.0);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(-50, 50, -50, 50, -10.0, 10.0);
+}
+
+
+int main(int argc, char** argv)
+{
+    glutInit(&argc, argv);
+    glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowSize (500, 500);
+    glutInitWindowPosition (100, 100);
+    glutCreateWindow ("Basic_Shape");
+    init ();
+    glutDisplayFunc(display);
+    glutMainLoop();
+    return 0; /* ISO C requires main to return int. */
+}
