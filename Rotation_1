@@ -1,0 +1,225 @@
+#include <windows.h>
+#include <GL/glut.h>
+#include <math.h>
+
+void circle(GLfloat rx,GLfloat ry,GLfloat cx,GLfloat cy){
+
+    glBegin(GL_TRIANGLE_FAN);
+
+	for(int i=0;i<=100;i++){
+
+	float angle=2*3.1416*i/100;
+
+	float x=rx*cosf(angle);
+	float y=ry*sinf(angle);
+	glVertex2f(x+cx,y+cy);
+
+}
+  glEnd();
+}
+
+GLfloat  i = 0.1f, i1 = 0.01f;
+void Idle()
+{
+    glutPostRedisplay();
+}
+
+
+void display(void)
+{
+
+    glClearColor(1.0,1.0,1.0,0.0);
+    glClear (GL_COLOR_BUFFER_BIT);
+
+    //ground
+    glBegin(GL_QUADS);
+    glColor3ub(53,53,53);
+    glVertex2f(0,0);
+    glVertex2f(40,0);
+    glColor3ub(128,139,150);
+    glVertex2f(40,5);
+    glVertex2f(0,5);
+
+    //sky
+
+    glColor3ub(228, 247, 250);
+    glVertex2f(0,5);
+    glVertex2f(40,5);
+    glColor3ub(143, 223, 235);
+    glVertex2f(40,30);
+    glVertex2f(0,30);
+
+    //kite1 base 1
+    glColor3ub(200, 181, 170);
+    glVertex2f(5,5);
+    glVertex2f(10,5);
+    glVertex2f(10,6);
+    glVertex2f(5,6);
+
+    //kite1 base 2
+    glColor3ub(157, 110, 94);
+    glVertex2f(6,6);
+    glVertex2f(9,6);
+    glVertex2f(9,7);
+    glVertex2f(6,7);
+
+    //kite1 pillar
+    glColor3ub(157, 110, 94);
+    glVertex2f(7,7);
+    glVertex2f(8,7);
+    glVertex2f(8,15);
+    glVertex2f(7,15);
+
+    //kite2 base 1
+    glColor3ub(200, 181, 170);
+    glVertex2f(30,5);
+    glVertex2f(35,5);
+    glVertex2f(35,6);
+    glVertex2f(30,6);
+
+    //kite2 base 2
+    glColor3ub(157, 110, 94);
+    glVertex2f(31,6);
+    glVertex2f(34,6);
+    glVertex2f(34,7);
+    glVertex2f(31,7);
+
+    //kite2 pillar
+    glColor3ub(157, 110, 94);
+    glVertex2f(32,7);
+    glVertex2f(33,7);
+    glVertex2f(33,15);
+    glVertex2f(32,15);
+
+    glEnd();
+
+    //base line
+    glLineWidth(3);
+    glBegin(GL_LINES);
+    glColor3ub(28, 40, 51 );
+    glVertex2f(0,5);
+    glVertex2f(40,5);
+
+    glEnd();
+
+    //kite1
+    glPushMatrix();
+    glTranslatef(7.5,15.5,0);
+    glRotatef(i,0.0,0.0,-1.0);
+
+    glBegin(GL_TRIANGLES);
+    glColor3ub(250,253,15);
+    glVertex2f(0,0);
+    glColor3ub(88, 221, 45 );
+    glVertex2f(2,5);
+    glVertex2f(5,3);
+
+    glEnd();
+    glBegin(GL_TRIANGLES);
+    glColor3ub(250,253,15);
+    glVertex2f(0,0);
+    glColor3ub(88, 221, 45 );
+    glVertex2f(-2,-5);
+    glVertex2f(-5,-3);
+
+    glEnd();
+    glBegin(GL_TRIANGLES);
+    glColor3ub(250,253,15);
+    glVertex2f(0,0);
+    glColor3ub(88, 221, 45 );
+    glVertex2f(-2,5);
+    glVertex2f(-5,3);
+
+    glEnd();
+    glBegin(GL_TRIANGLES);
+    glColor3ub(250,253,15);
+    glVertex2f(0,0);
+    glColor3ub(88, 221, 45 );
+    glVertex2f(2,-5);
+    glVertex2f(5,-3);
+
+    glEnd();
+
+    glPopMatrix();
+
+    //kite2
+    glPushMatrix();
+    glTranslatef(32.5,15.5,0);
+    glRotatef(i1,0.0,0.0,1.0);
+
+    glBegin(GL_TRIANGLES);
+    glColor3ub(253, 6, 6 );
+    glVertex2f(0,0);
+    glColor3ub(88, 221, 45 );
+    glVertex2f(2,5);
+    glVertex2f(5,3);
+
+    glEnd();
+    glBegin(GL_TRIANGLES);
+    glColor3ub(253, 6, 6 );
+    glVertex2f(0,0);
+    glColor3ub(88, 221, 45 );
+    glVertex2f(-2,-5);
+    glVertex2f(-5,-3);
+
+    glEnd();
+    glBegin(GL_TRIANGLES);
+    glColor3ub(253, 6, 6 );
+    glVertex2f(0,0);
+    glColor3ub(88, 221, 45 );
+    glVertex2f(-2,5);
+    glVertex2f(-5,3);
+
+    glEnd();
+    glBegin(GL_TRIANGLES);
+    glColor3ub(253, 6, 6 );
+    glVertex2f(0,0);
+    glColor3ub(88, 221, 45 );
+    glVertex2f(2,-5);
+    glVertex2f(5,-3);
+
+    glEnd();
+
+
+
+    glPopMatrix();
+    i+= 0.07f;
+    i1+=0.03;
+
+    //kite1 center circle
+    glColor3ub(250,253,15);
+    circle(0.75,0.5,7.5,15.5);
+    //kite2 center circle
+    glColor3ub(253, 6, 6 );
+    circle(0.75,0.5,32.5,15.5);
+
+
+
+
+
+
+    glFlush ();
+}
+
+
+void init (void)
+{
+glClearColor (1.0, 1.0, 1.0, 0.0);
+glMatrixMode(GL_PROJECTION);
+glLoadIdentity();
+gluOrtho2D(0,40,0,30);
+}
+
+
+int main(int argc, char** argv)
+{
+glutInit(&argc, argv);
+glutInitWindowSize (500, 500);
+glutInitWindowPosition (50, 50);
+glutCreateWindow ("Rotation");
+init ();
+glutDisplayFunc(display);
+glutIdleFunc(Idle);
+glutMainLoop();
+return 0;
+}
